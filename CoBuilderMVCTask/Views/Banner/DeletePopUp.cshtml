@@ -1,0 +1,22 @@
+﻿@model CoBuilderMVCTask.Models.BannerDB
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete Banner, @Model.Name <span id="bannerId" style="display: none;">@Model.Id</span>      </h4>
+            </div>
+            <div class="modal-body">
+                <p>Delete banner?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" id="btnDelete" data-dismiss="modal" class="btn btn-danger">Yes</button>
+            </div>
+        </div>
+<script>
+    $('#btnDelete').on('click', function () {
+       
+        $('.modal-dialog').load("Delete/" + $('#bannerId').text());
+    });
+</script>

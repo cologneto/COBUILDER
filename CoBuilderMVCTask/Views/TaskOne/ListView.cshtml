@@ -1,0 +1,31 @@
+﻿@model CoBuilderMVCTask.Models.ListsOfNumbers
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>ListsOfNumbers</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <h3>Random numbers list</h3>
+               @foreach (var item in @Model.randomList)
+               {
+                   <div class="col-md-1">@item</div>
+               }
+                <br />
+                <h3>Positive numbers list</h3>
+                @foreach (var item in @Model.positiveNumberList)
+                {
+                    <div class="col-md-1">@item</div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to random numbers list generator", "Index")
+</div>

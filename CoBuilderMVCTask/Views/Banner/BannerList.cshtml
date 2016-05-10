@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CoBuilderMVCTask.Models.BannerDB>
+
+@{
+
+
+    ViewBag.Title = "Edit Banner";
+}
+
+<h2 class="text-center">Edit\Delete banners</h2>
+<br />
+<table class="table" id="bannerTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValidFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValidTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.File)
+            </th>
+            <th>Edit/Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValidFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValidTo)
+                </td>
+                @{
+                    var base64 = Convert.ToBase64String(item.File);
+                    var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                }
+                <td>
+                    <img src="@imgSrc" width="200" height="40" alt="image" />
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @*@Html.ActionLink("Delete", "DeletePopUp", new { id = item.Id }, new { @id = "delete" })*@
+                    <a class="delete" data-id="@item.Id" style="cursor: pointer;">Delete</a>
+                </td>
+            </tr>
+                    }
+    </tbody>
+</table>
+
+<!-- Trigger the modal with a button -->
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    </div>
+</div>
+<script>
+
+
+</script>

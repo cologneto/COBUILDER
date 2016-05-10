@@ -1,0 +1,68 @@
+﻿@model CoBuilderMVCTask.Models.BannerDB
+
+@using (Html.BeginForm("Edit", "Banner", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Edit Banner - @Model.Name</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ValidFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ValidFrom, new { htmlAttributes = new { @class = "form-control datetimePicker" } })
+                @Html.ValidationMessageFor(model => model.ValidFrom, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ValidTo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ValidTo, new { htmlAttributes = new { @class = "form-control datetimePicker" } })
+                @Html.ValidationMessageFor(model => model.ValidTo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @{
+            var base64 = Convert.ToBase64String(Model.File);
+            var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+        }
+
+
+
+        <div class="form-group">
+            @Html.Label("Picture", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                <img src="@imgSrc" width="200" height="40" alt="image" />
+                <input type="hidden" name="file" value="@base64" />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Select Picture", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" id="picture" name="upload" accept="image/jpg" value="Please select picture." />
+            </div>
+        </div>
+
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Finish" class="btn btn-default" />
+            </div>
+        </div>
+  
+            }
+
+<div>
+    @Html.ActionLink("Back to List", "BannerList")
+</div>

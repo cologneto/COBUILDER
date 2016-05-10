@@ -1,0 +1,28 @@
+﻿@model IEnumerable<CoBuilderMVCTask.Models.BannerDB>
+
+@foreach (var item in Model)
+{
+        var base64 = Convert.ToBase64String(item.File);
+        var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+        <img hidden="hidden" class="rndImage" src="@imgSrc" width="1024" height="200" alt="image" />
+}
+
+<script>
+    console.log($('.rndImage'));
+
+    var arr = $('.rndImage');
+    var currentNumber = 1;
+    var begin = true;
+    $('.rndImage:nth-of-type(' + currentNumber + ')').show();
+    setInterval(function () {
+        var m = Math.ceil(Math.random() * arr.length);
+        while (currentNumber == m) {
+            m = Math.ceil(Math.random() * arr.length);
+        }
+        $('.rndImage:nth-of-type(' + currentNumber + ')').hide();
+        $('.rndImage:nth-of-type(' + m + ')').show();
+        currentNumber = m;
+        
+    }, 10000);
+
+</script>
